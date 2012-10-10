@@ -81,8 +81,6 @@
 					'icon-cursor'			:	'auto'
 				}, options ) );
 
-				var events = [ 'click' ];
-
 				// create a custom event that is triggered when the icon is clicked
 				$this.on( 'click', function( e ) {
 					if($this.iconfield( 'isEventOnIcon', e ) ) {
