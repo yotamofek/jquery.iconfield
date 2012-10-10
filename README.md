@@ -4,6 +4,8 @@
 
 This jQuery plugin is used for creating nifty text fields with an icon on the left side.
 
+![Example of iconfield](https://raw.github.com/yotamofek/jquery.iconfield/master/iconfield.png)
+
 The icon can be used for emphasizing the role of the text box to the user,
 and can be used as an interactive element by binding to its events.
 The text that the user enters in the field will not overlap the icon.
