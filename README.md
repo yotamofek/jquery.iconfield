@@ -110,3 +110,37 @@ $('#search-field').iconfield( 'option', {
   'horizontal-padding'  : 2
 } );
 ```
+
+## Events
+
+Iconfield exports mouse-related events for easing advanced usage of the plugin.
+These events enable a user to bind callback functions for events pertaining specifically to the icon
+(i.e. mouse events that occur when the mouse is positioned over the icon.)
+
+The following events are available:
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>iconfield.click</code></td>
+      <td>Triggered when the user clicked on the icon.</td>
+    </tr>
+    <tr>
+      <td><code>iconfield.mouseenter</code></td>
+      <td>Triggered when the mouse enters the area of the icon.</td>
+    </tr>
+    <tr>
+      <td><code>iconfield.mouseleave</code></td>
+      <td>Triggered when the mouse leaves the area of the icon.</td>
+    </tr>
+    <tr>
+      <td><code>iconfield.mousemove</code></td>
+      <td>Triggered for every mouse movement made while hovering above the icon.</td>
+    </tr>
+  </tbody>
+</table>
