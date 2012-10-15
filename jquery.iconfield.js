@@ -2,29 +2,35 @@
 
 	var methods = {
 		isEventOnIcon : function( e ) {
+
 			var $this = $(this),
+				// calculate the x and y relative to the text field
 				x = e.pageX - $this.position().left,
 				y = e.pageY - $this.position().top,
+
+				// get dimensions from options
 				horizontalPadding = $this.iconfield( 'option', 'horizontal-padding' ),
 				verticalPadding = $this.iconfield( 'option', 'vertical-padding' ),
 				imageWidth = $this.iconfield( 'option', 'image-width' ),
 				imageHeight = $this.iconfield( 'option', 'image-height' );
-
-
 
 				return (
 					(x >= horizontalPadding && x <= horizontalPadding + imageWidth)
 					&&
 					(y >= verticalPadding && y <= verticalPadding + imageHeight)
 				);
+
 		},
 
 		refresh : function( ) {
-			return this.each( function() {
 
+			return this.each( function( ) {
 				var $this = $(this),
 					data = $this.data( 'iconfield' ),
-					image = new Image();
+					image = new Image( );
+
+
+				// about to load the image so we can find out what the image's dimensions are
 
 				image.onload = function( ) {
 
@@ -35,6 +41,10 @@
 						'padding-left'			:	image.width + data['horizontal-padding'] * 2,
 					};
 
+					if( data['old-cursor'] ) {
+						style_map['cursor'] = data['old-cursor'];
+					}
+
 					// calculate the minimal height this textfield should take,
 					// taking into account the image's height and paddings beneath and above it
 					var minimal_height = (image.height + data['vertical-padding'] * 2);
@@ -43,6 +53,8 @@
 					// add padding if the field's current height is not high enough to include the image
 					// (+ vertical padding)
 					if( current_height < minimal_height ) {
+						// the padding is the difference between the minimal height and the current height
+						// divided by two, because one half goes to the bottom and one to the top
 						var padding = (minimal_height - current_height) / 2;
 						$.extend( style_map, {
 							'padding-top'		:	padding,
@@ -55,7 +67,6 @@
 						'image-width'	:	image.width,
 						'image-height'	:	image.height
 					} );
-					$this.data( 'iconfield', data);
 					
 					// update the field's style
 					$this.css( style_map );
@@ -98,7 +109,7 @@
 					$this.trigger( 'iconfield.mousemove' );
 
 					// if the mouse is on the icon and wasn't before, or vice versa,
-					// trigger the relevant event and store the current position of
+					// trigger the relevant event and store the current state of
 					// the mouse
 					if( curOnIcon != wasOnIcon ) {
 						if( curOnIcon && !wasOnIcon ) {
@@ -109,7 +120,6 @@
 						}
 
 						data['was-on-icon'] = curOnIcon;
-						$this.data( 'iconfield', data );
 					}
 				} );
 
@@ -124,7 +134,6 @@
 						data['icon-cursor'] != curCursor) {
 						// save the cursor before it's changed
 						data['old-cursor'] = curCursor ? curCursor : 'auto';
-						$this.data( 'iconfield', data );
 
 						// change the cursor
 						$this.css( 'cursor', data['icon-cursor'] );
@@ -145,7 +154,7 @@
 				} );
 
 				// refresh the styling
-				$this.iconfield( 'refresh' )
+				$this.iconfield( 'refresh' );
 
 			} );
 
