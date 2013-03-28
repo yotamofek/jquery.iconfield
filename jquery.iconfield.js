@@ -4,6 +4,10 @@
 		isEventOnIcon : function( e ) {
 
 			var $this = $(this),
+
+				data = $this.data( 'iconfield' ),
+				left = _.isUndefined( data['left'] ) || data['left'],
+
 				// calculate the x and y relative to the text field
 				x = e.pageX - $this.position().left,
 				y = e.pageY - $this.position().top,
@@ -14,11 +18,16 @@
 				imageWidth = $this.iconfield( 'option', 'image-width' ),
 				imageHeight = $this.iconfield( 'option', 'image-height' );
 
-				return (
-					(x >= horizontalPadding && x <= horizontalPadding + imageWidth)
-					&&
-					(y >= verticalPadding && y <= verticalPadding + imageHeight)
-				);
+				// calculate the offset of the left side of the icon
+				horizontalOffset = left ?
+								   horizontalPadding :
+								   $this.width() - horizontalPadding - imageWidth;
+
+			return (
+				(x >= horizontalOffset && x <= horizontalOffset + imageWidth)
+				&&
+				(y >= verticalPadding && y <= verticalPadding + imageHeight)
+			);
 
 		},
 
@@ -34,12 +43,26 @@
 
 				image.onload = function( ) {
 
+					var left = _.isUndefined( data['left'] ) || data['left'],
+						x_padding = data['horizontal-padding'],
+						y_padding = data['vertical-padding'],
+						bg_position = left ?
+									  x_padding : 
+									  $this.width() - x_padding * 2 - image.width;
+
 					var style_map = {
 						'background-image'		:	'url(' + data['image-url'] + ')',
 						'background-repeat'		:	'no-repeat',
-						'background-position'	:	data['horizontal-padding'] + 'px center',
-						'padding-left'			:	image.width + data['horizontal-padding'] * 2,
+						'background-position'	:	bg_position + 'px center',
 					};
+
+					if (left) {
+						style_map['padding-left'] = image.width + x_padding * 2;
+					}
+					else {
+						style_map['padding-left'] = x_padding
+						style_map['padding-right'] = x_padding;
+					}
 
 					if( data['old-cursor'] ) {
 						style_map['cursor'] = data['old-cursor'];
@@ -47,7 +70,7 @@
 
 					// calculate the minimal height this textfield should take,
 					// taking into account the image's height and paddings beneath and above it
-					var minimal_height = (image.height + data['vertical-padding'] * 2);
+					var minimal_height = (image.height + y_padding * 2);
 					var current_height = Number($this.css( 'height' ).slice(0, -2))
 
 					// add padding if the field's current height is not high enough to include the image
@@ -80,7 +103,7 @@
 
 		init : function( options ) {
 
-			return this.each( function() {
+			return this.each( function( ) {
 
 				var $this = $(this);
 
@@ -89,7 +112,8 @@
 				$this.iconfield( 'option', $.extend( {
 					'horizontal-padding'	:	2,
 					'vertical-padding'		:	4,
-					'icon-cursor'			:	'auto'
+					'icon-cursor'			:	'auto',
+					'left'					:	true,
 				}, options ) );
 
 				// create a custom event that is triggered when the icon is clicked
