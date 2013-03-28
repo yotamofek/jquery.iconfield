@@ -46,6 +46,10 @@ The following options are available:
       <td><code>vertical-padding</code></td>
       <td>Number of pixels with which to pad the top and bottom sides of the icon.</td>
     </tr>
+    <tr>
+      <td><code>left</code></td>
+      <td>Whether the icon is to be placed on the left side, or (if value is <code>false</code>) the icon will be placed on the right. (Default: <code>true</code>)</td>
+    </tr>
   </tbody>
 </table>
 
