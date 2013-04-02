@@ -170,7 +170,7 @@
 
 					// 'auto' means that no special cursor was specified by the user,
 					// meaning that there is nothing to change back to
-					if( data['icon-cursor'] != 'auto' ) {
+					if ( data['icon-cursor'] != 'auto' ) {
 						// if no old cursor was stored (meaning that the mouse was never on the icon)
 						// change back to 'auto'
 						$this.css( 'cursor', data['old-cursor'] ? data['old-cursor'] : 'auto' );
