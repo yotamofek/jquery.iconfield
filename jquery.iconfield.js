@@ -43,7 +43,7 @@
 
 				image.onload = function( ) {
 
-					var left = _.isUndefined( data['left'] ) || data['left'],
+					var left = data['left'],
 						x_padding = data['horizontal-padding'],
 						y_padding = data['vertical-padding'],
 						bg_position = left ?
