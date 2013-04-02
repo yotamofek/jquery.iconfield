@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This jQuery plugin is used for creating nifty text fields with an icon on the left side.
+This jQuery plugin is used for creating nifty text fields with an icon on either side.
 
 ![Example of iconfield](https://raw.github.com/yotamofek/jquery.iconfield/master/iconfield.png)
 
