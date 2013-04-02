@@ -48,7 +48,7 @@
 						y_padding = data['vertical-padding'],
 						bg_position = left ?
 									  x_padding : 
-									  $this.width() - x_padding * 2 - image.width;
+									  $this.width() - x_padding * 2;
 
 					var style_map = {
 						'background-image'		:	'url(' + data['image-url'] + ')',
@@ -61,7 +61,7 @@
 					}
 					else {
 						style_map['padding-left'] = x_padding
-						style_map['padding-right'] = x_padding;
+						style_map['padding-right'] = x_padding * 2 + image.width;
 					}
 
 					if( data['old-cursor'] ) {
