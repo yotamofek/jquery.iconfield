@@ -55,12 +55,12 @@
 					};
 
 					if ( left ) {
-						style_map['padding-left'] = image.width + (x_padding * 2);
+						style_map['padding-left'] = image.width + ( x_padding * 2 );
 					}
 					else {
 						$.extend( style_map, {
 							'padding-left': x_padding,
-							'padding-right': (x_padding * 2) + image.width,
+							'padding-right': ( x_padding * 2 ) + image.width,
 						} );
 					}
 
@@ -70,15 +70,15 @@
 
 					// calculate the minimal height this textfield should take,
 					// taking into account the image's height and paddings beneath and above it
-					var minimal_height = image.height + y_padding * 2;
-					var current_height = Number($this.css( 'height' ).slice(0, -2))
+					var minimal_height = image.height + ( y_padding * 2 );
+					var current_height = Number( $this.css( 'height' ).slice( 0, -2 ) )
 
 					// add padding if the field's current height is not high enough to include the image
 					// (+ vertical padding)
 					if ( current_height < minimal_height ) {
 						// the padding is the difference between the minimal height and the current height
 						// divided by two, because one half goes to the bottom and one to the top
-						var padding = (minimal_height - current_height) / 2;
+						var padding = ( minimal_height - current_height ) / 2;
 						$.extend( style_map, {
 							'padding-top': padding,
 							'padding-bottom' : padding,
