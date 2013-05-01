@@ -4,7 +4,7 @@
 
 This jQuery plugin is used for creating nifty text fields with an icon on either side.
 
-![Example of iconfield](https://raw.github.com/yotamofek/jquery.iconfield/master/iconfield.png)
+![Example of iconfield](https://raw.github.com/yotamofek/jquery.iconfield/master/docs/iconfield.png)
 
 The icon can be used for emphasizing the role of the text box to the user,
 and can be used as an interactive element by binding to its events.
