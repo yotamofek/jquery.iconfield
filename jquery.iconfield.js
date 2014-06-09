@@ -6,23 +6,22 @@
 			var $this = $(this),
 
 				data = $this.data( 'iconfield' ),
-				left = data['left'],
-
-				// calculate the x and y relative to the text field
-				x = e.pageX - $this.position().left,
-				y = e.pageY - $this.position().top,
+				left = data['left']
 
 				// get dimensions from options
 				x_padding = $this.iconfield( 'option', 'horizontal-padding' ),
 				y_padding = $this.iconfield( 'option', 'vertical-padding' ),
 				image_width = $this.iconfield( 'option', 'image-width' ),
-				image_height = $this.iconfield( 'option', 'image-height' );
+				image_height = $this.iconfield( 'option', 'image-height' ),
 
-				// calculate the offset of the left side of the icon
-				x_offset = left ? x_padding : $this.width() - x_padding - image_width;
+				// calculate the x and y relative to the text field
+				y = e.pageY - $this.offset().top,
+				x = left ?
+					e.pageX - $this.offset().left :
+					Math.abs($this.offset().left + $this.outerWidth() - 1 - e.pageX);
 
 			return (
-				( x >= x_offset && x <= ( x_offset + image_width ) )
+				( x >= x_padding && x <= ( x_padding + image_width ) )
 				&&
 				( y >= y_padding && y <= ( y_padding + image_height ) )
 			);
@@ -43,22 +42,23 @@
 
 					var left = data['left'],
 						x_padding = data['horizontal-padding'],
-						y_padding = data['vertical-padding'],
-						bg_position = left ?
-									  x_padding : 
-									  $this.width() - ( x_padding * 2 );
+						y_padding = data['vertical-padding'];
 
 					var style_map = {
 						'background-image': 'url(' + data['image-url'] + ')',
 						'background-repeat': 'no-repeat',
-						'background-position': bg_position + 'px center',
 					};
 
-					if ( left ) {
-						style_map['padding-left'] = image.width + ( x_padding * 2 );
+					if ( left ) { 
+						$.extend( style_map, {
+							'background-position': x_padding + 'px center',
+							'padding-left': image.width + ( x_padding * 2 ),
+							'padding-right': x_padding,
+						} );
 					}
 					else {
 						$.extend( style_map, {
+							'background-position': 'right ' + x_padding + 'px center',
 							'padding-left': x_padding,
 							'padding-right': ( x_padding * 2 ) + image.width,
 						} );
